@@ -234,6 +234,98 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════════════════════════════════════
+          RECONHECIMENTO & IMPRENSA — fundo cinza/verde suave
+      ════════════════════════════════════════════════ */}
+      <section className="py-24 bg-[#F9FAF8] border-t border-b border-[#E4E9E2]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <RevealOnScroll>
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <div className="w-8 h-px bg-[#C9A84C]" />
+                <span className="text-xs font-semibold tracking-widest uppercase text-[#C9A84C]">Credibilidade & Destaques</span>
+                <div className="w-8 h-px bg-[#C9A84C]" />
+              </div>
+              <h2 className="font-head text-4xl font-semibold text-[#0E2A1A]">
+                Reconhecimento e Presença na Mídia
+              </h2>
+            </RevealOnScroll>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+            {/* ALESP */}
+            <RevealOnScroll direction="left" className="h-full">
+              <div className="bg-white rounded-3xl border border-[#E4E9E2] overflow-hidden shadow-[0_8px_30px_rgba(14,42,26,0.04)] flex flex-col h-full hover:shadow-[0_16px_40px_rgba(14,42,26,0.08)] hover:-translate-y-1 transition-all duration-300">
+                <div className="aspect-[16/10] relative bg-[#F0F7F3] overflow-hidden group">
+                  <Image 
+                    src="/image/dr andre/leticiaaguiar.jpeg" 
+                    alt="Dr. André Elias Junqueira recebendo moção de congratulação na ALESP da Deputada Leticia Aguiar"
+                    fill
+                    className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                  />
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="text-[10px] font-bold uppercase tracking-wider bg-white/95 text-[#0E2A1A] px-3 py-1.5 rounded-full border border-[#E4E9E2]">
+                      Homenagem Oficial
+                    </span>
+                  </div>
+                </div>
+                <div className="p-8 flex flex-col flex-grow">
+                  <span className="text-xs font-semibold uppercase tracking-widest text-[#C9A84C] mb-2">Assembleia Legislativa de SP</span>
+                  <h3 className="font-head text-xl font-bold text-[#0E2A1A] mb-3">Homenageado na ALESP</h3>
+                  <p className="text-sm text-[#4A6355] leading-relaxed flex-grow">
+                    Homenagem oficial de Congratulação conferida pela Deputada Estadual Leticia Aguiar em reconhecimento à dedicação à medicina regenerativa e o compromisso ético e humanizado no cuidado com os pacientes.
+                  </p>
+                  <div className="mt-6">
+                    <Link href="/sobre" className="inline-flex items-center gap-1.5 text-xs font-bold text-[#C9A84C] hover:text-[#DFC06A] transition-colors">
+                      Ler sobre a moção
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </RevealOnScroll>
+
+            {/* BAND TV */}
+            <RevealOnScroll direction="right" className="h-full">
+              <div className="bg-white rounded-3xl border border-[#E4E9E2] overflow-hidden shadow-[0_8px_30px_rgba(14,42,26,0.04)] flex flex-col h-full hover:shadow-[0_16px_40px_rgba(14,42,26,0.08)] hover:-translate-y-1 transition-all duration-300">
+                <div className="aspect-[16/10] relative bg-[#0E2A1A] overflow-hidden group">
+                  <Image 
+                    src="/image/dr andre/band.png" 
+                    alt="Entrevista do Dr. André Elias Junqueira na BAND TV"
+                    fill
+                    className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                  />
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="text-[10px] font-bold uppercase tracking-wider bg-white/95 text-[#CC0000] px-3 py-1.5 rounded-full border border-[#E4E9E2]">
+                      BAND TV
+                    </span>
+                  </div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-14 h-14 rounded-full bg-[#C9A84C] text-[#0E2A1A] flex items-center justify-center text-lg shadow-md group-hover:scale-110 transition-transform duration-300">
+                      ▶
+                    </div>
+                  </div>
+                </div>
+                <div className="p-8 flex flex-col flex-grow">
+                  <span className="text-xs font-semibold uppercase tracking-widest text-[#CC0000] mb-2">Entrevista Televisiva</span>
+                  <h3 className="font-head text-xl font-bold text-[#0E2A1A] mb-3">Medicina Regenerativa em Foco</h3>
+                  <p className="text-sm text-[#4A6355] leading-relaxed flex-grow">
+                    Entrevista especial concedida à BAND TV discutindo como as terapias regenerativas estão revolucionando o tratamento de artrose e dores crônicas, evitando procedimentos cirúrgicos.
+                  </p>
+                  <div className="mt-6 font-semibold flex items-center gap-4">
+                    <a href="https://www.youtube.com/results?search_query=dr+andre+elias+junqueira" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0E2A1A] hover:text-[#C9A84C] transition-colors">
+                      Assistir Entrevista
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </RevealOnScroll>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════
           ESPECIALIDADES — fundo tint verde
       ════════════════════════════════════════════════ */}
       <section className="py-28 bg-[#F0F7F3]">

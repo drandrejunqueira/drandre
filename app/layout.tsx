@@ -66,6 +66,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  verification: {
+    google: 'v853giZlFnZiRCeyRWPYh1OKe02UjrtUljy6LhsB7Wk',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -206,6 +206,7 @@ export default function SobrePage() {
 
               <div className="grid sm:grid-cols-2 gap-4">
                 {[
+                  { label: 'BAMR', desc: 'Academia Brasileira de Medicina Regenerativa' },
                   { label: 'SBRET', desc: 'Sociedade Brasileira de Regeneração Tecidual' },
                   { label: 'AAOS', desc: 'American Academy of Orthopaedic Surgeons' },
                   { label: 'SBOT (Dor)', desc: 'Comitê de Dor da Sociedade Brasileira de Ortopedia e Traumatologia' },
@@ -224,31 +225,208 @@ export default function SobrePage() {
         </div>
       </section>
 
-      {/* Mídia */}
-      <section className="py-20 bg-[#F9FAF8]">
+      {/* ══ Reconhecimento & Homenagens ══ */}
+      <section className="py-24 bg-[#F0F7F3] border-t border-b border-[#E4E9E2]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
+            <RevealOnScroll>
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <div className="w-8 h-px bg-[#C9A84C]" />
+                <span className="text-xs font-semibold tracking-widest uppercase text-[#C9A84C]">Homenagem & Reconhecimento</span>
+                <div className="w-8 h-px bg-[#C9A84C]" />
+              </div>
+              <h2 className="font-head text-3xl lg:text-4xl font-semibold text-[#0E2A1A] mb-4">
+                Reconhecimento Público (ALESP)
+              </h2>
+              <p className="text-[#4A6355] max-w-xl mx-auto text-sm lg:text-base">
+                Moção de Congratulação oficial recebida da Assembleia Legislativa do Estado de São Paulo pelo compromisso ético e contribuição para a saúde pública e a medicina regenerativa.
+              </p>
+            </RevealOnScroll>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Foto de Entrega */}
+            <RevealOnScroll direction="left" className="relative">
+              <div className="aspect-[3/4] sm:aspect-[4/3] lg:aspect-[4/5] rounded-2xl overflow-hidden bg-white border border-[#E4E9E2] shadow-[0_8px_30px_rgba(0,0,0,0.05)] relative group">
+                <Image 
+                  src="/image/dr andre/leticiaaguiar.jpeg" 
+                  alt="Dr. André Elias Junqueira recebendo moção de Congratulação da Deputada Leticia Aguiar na ALESP"
+                  fill
+                  className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent opacity-90" />
+                <div className="absolute bottom-6 left-6 right-6 text-white">
+                  <span className="inline-block px-3 py-1 rounded-full bg-[#C9A84C] text-[10px] font-semibold uppercase tracking-wide mb-2">
+                    Assembleia Legislativa de SP
+                  </span>
+                  <p className="text-sm font-semibold leading-snug">
+                    Dr. André Elias Junqueira com a Deputada Estadual Leticia Aguiar na ALESP.
+                  </p>
+                  <p className="text-[11px] text-white/70 mt-1">
+                    Entrega oficial da Moção de Congratulação · 08 de junho de 2026.
+                  </p>
+                </div>
+              </div>
+            </RevealOnScroll>
+
+            {/* Texto explicativo e Certificado */}
+            <RevealOnScroll direction="right" className="space-y-6">
+              <div className="bg-white p-8 rounded-2xl border border-[#E4E9E2] shadow-[0_8px_30px_rgba(14,42,26,0.04)] relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-2 h-full bg-[#C9A84C]" />
+                <h3 className="font-head text-xl font-bold text-[#0E2A1A] mb-4">Moção de Congratulação</h3>
+                <div className="text-sm text-[#4A6355] space-y-4 leading-relaxed">
+                  <p>
+                    Em <strong>08 de junho de 2026</strong>, a Assembleia Legislativa do Estado de São Paulo, por iniciativa da Deputada Leticia Aguiar, conferiu a presente moção de congratulação ao Dr. André Elias Junqueira.
+                  </p>
+                  <p>
+                    A homenagem é um reconhecimento oficial à sua dedicação à medicina, ao cuidado com a saúde e à sua nobre missão de promover qualidade de vida às pessoas. Sua trajetória é descrita como expressão de perseverança, excelência profissional e compromisso com o bem-estar humano.
+                  </p>
+                  <p className="italic text-[#0E2A1A]/80 font-medium border-l-2 border-[#C9A84C]/50 pl-3">
+                    "Ser médico é mais do que exercer uma profissão; é dedicar-se diariamente ao cuidado da vida. Sua caminhada inspira pela busca constante do conhecimento e pelo compromisso em oferecer o melhor aos seus pacientes."
+                  </p>
+                </div>
+              </div>
+
+              {/* Grid de Certificados Oficiais */}
+              <div className="grid sm:grid-cols-2 gap-4">
+                {/* Certificado ALESP */}
+                <a 
+                  href="/image/dr andre/congratulacao.webp" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="group bg-white p-4 rounded-xl border border-[#E4E9E2] hover:border-[#C9A84C]/50 shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all flex flex-col gap-3"
+                >
+                  <div className="w-full aspect-[4/3] relative bg-[#F9FAF8] border border-[#E4E9E2] rounded overflow-hidden">
+                    <Image 
+                      src="/image/dr andre/congratulacao.webp" 
+                      alt="Certificado de Congratulação ALESP"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-[#0E2A1A] group-hover:text-[#C9A84C] transition-colors flex items-center gap-1">
+                      Certificado ALESP
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+                      </svg>
+                    </div>
+                    <p className="text-[10px] text-[#8FA89A] mt-0.5">Moção de Congratulação</p>
+                  </div>
+                </a>
+
+                {/* Certificado BAMR */}
+                <a 
+                  href="/image/dr andre/certificado abmr.jpeg" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="group bg-white p-4 rounded-xl border border-[#E4E9E2] hover:border-[#C9A84C]/50 shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all flex flex-col gap-3"
+                >
+                  <div className="w-full aspect-[4/3] relative bg-[#F9FAF8] border border-[#E4E9E2] rounded overflow-hidden">
+                    <Image 
+                      src="/image/dr andre/certificado abmr.jpeg" 
+                      alt="Certificado de Membro da Academia Brasileira de Medicina Regenerativa"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-[#0E2A1A] group-hover:text-[#C9A84C] transition-colors flex items-center gap-1">
+                      Certificado BAMR
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+                      </svg>
+                    </div>
+                    <p className="text-[10px] text-[#8FA89A] mt-0.5">Academia Brasileira de Med. Regenerativa</p>
+                  </div>
+                </a>
+              </div>
+            </RevealOnScroll>
+          </div>
+        </div>
+      </section>
+
+      {/* Mídia */}
+      <section className="py-24 bg-[#F9FAF8]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
             <RevealOnScroll>
               <SectionHeader tag="Na Mídia" title="Dr. André na Imprensa" center />
             </RevealOnScroll>
           </div>
-          <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            {[
-              { logo: 'BAND TV', color: '#CC0000', type: 'Entrevista Televisiva', desc: 'Revolução no Tratamento da Dor e Artrose com Medicina Regenerativa', icon: '📺' },
-              { logo: 'REVISTA', color: '#0E2A1A', type: 'Reportagem Especializada', desc: 'Destaque em publicação sobre inovações em ortopedia regenerativa', icon: '📰' },
-            ].map((m) => (
-              <RevealOnScroll key={m.logo}>
-                <div className="bg-white rounded-2xl border border-[#E4E9E2] p-8 flex flex-col items-center gap-4 text-center hover:shadow-[0_8px_32px_rgba(14,42,26,0.08)] hover:-translate-y-1 transition-all">
-                  <div className="text-3xl">{m.icon}</div>
-                  <div className="font-black text-2xl" style={{ color: m.color }}>{m.logo}</div>
-                  <div className="text-xs font-semibold uppercase tracking-widest text-[#8FA89A]">{m.type}</div>
-                  <p className="text-sm text-[#4A6355] leading-relaxed">{m.desc}</p>
-                  <button className="mt-2 px-5 py-2.5 rounded-full border-2 border-[#C9A84C] text-[#C9A84C] font-semibold text-sm hover:bg-[#C9A84C] hover:text-[#0E2A1A] transition-all">
-                    Ver conteúdo →
-                  </button>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch">
+            {/* Band TV Card */}
+            <RevealOnScroll direction="left" className="h-full">
+              <div className="bg-white rounded-2xl border border-[#E4E9E2] overflow-hidden hover:shadow-[0_12px_40px_rgba(14,42,26,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+                {/* Banner de vídeo */}
+                <div className="aspect-[16/10] relative bg-[#0E2A1A] overflow-hidden group">
+                  <Image 
+                    src="/image/dr andre/band.png" 
+                    alt="Entrevista com o Dr. André Elias Junqueira na BAND TV"
+                    fill
+                    className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                  />
+                  {/* Overlay escuro que clareia no hover */}
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+                  
+                  {/* Botão de play animado */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-[#C9A84C] text-[#0E2A1A] flex items-center justify-center text-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      ▶
+                    </div>
+                  </div>
                 </div>
-              </RevealOnScroll>
-            ))}
+
+                <div className="p-8 flex flex-col flex-grow text-center">
+                  <span className="text-xs font-semibold uppercase tracking-widest text-[#CC0000] mb-2">
+                    Entrevista Televisiva · BAND TV
+                  </span>
+                  <h3 className="font-head text-lg font-bold text-[#0E2A1A] mb-3">
+                    Revolução no Tratamento da Dor e Artrose com Medicina Regenerativa
+                  </h3>
+                  <p className="text-sm text-[#4A6355] leading-relaxed flex-grow">
+                    Entrevista completa com o Dr. André Elias Junqueira no canal Band Vale, discutindo as principais inovações no controle de dores articulares e regeneração de tecidos.
+                  </p>
+                  <div className="mt-6">
+                    <a 
+                      href="https://www.youtube.com/results?search_query=dr+andre+elias+junqueira" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#0E2A1A] text-white font-semibold text-xs hover:bg-[#1B4D35] transition-colors"
+                    >
+                      Assistir Entrevista
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </RevealOnScroll>
+
+            {/* Revista / Outro Card */}
+            <RevealOnScroll direction="right" className="h-full">
+              <div className="bg-white rounded-2xl border border-[#E4E9E2] p-8 flex flex-col items-center justify-center text-center hover:shadow-[0_12px_40px_rgba(14,42,26,0.08)] hover:-translate-y-1 transition-all duration-300 h-full">
+                <div className="w-16 h-16 rounded-2xl bg-[#0E2A1A]/5 flex items-center justify-center text-[#0E2A1A] text-3xl mb-6">
+                  📰
+                </div>
+                <span className="text-xs font-semibold uppercase tracking-widest text-[#DFC06A] mb-2">
+                  Reportagem Especializada
+                </span>
+                <h3 className="font-head text-lg font-bold text-[#0E2A1A] mb-3">
+                  Revistas & Publicações
+                </h3>
+                <p className="text-sm text-[#4A6355] leading-relaxed max-w-sm">
+                  Destaque em publicações de saúde e bem-estar, trazendo informações acessíveis sobre prevenção, terapias biológicas e técnicas minimamente invasivas em ortopedia.
+                </p>
+                <div className="mt-8">
+                  <Link 
+                    href="/blog" 
+                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border-2 border-[#0E2A1A] text-[#0E2A1A] font-semibold text-xs hover:bg-[#0E2A1A] hover:text-white transition-all"
+                  >
+                    Acessar Conteúdos
+                  </Link>
+                </div>
+              </div>
+            </RevealOnScroll>
           </div>
         </div>
       </section>
