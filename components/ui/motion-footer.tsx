@@ -368,7 +368,14 @@ export function CinematicFooter() {
               <span className="text-muted-foreground text-[10px] md:text-xs font-bold uppercase tracking-widest">Feito com</span>
               <span className="animate-footer-heartbeat text-sm md:text-base text-destructive">❤</span>
               <span className="text-muted-foreground text-[10px] md:text-xs font-bold uppercase tracking-widest">por</span>
-              <span className="text-foreground font-black text-xs md:text-sm tracking-normal ml-1">2TimeWeb</span>
+              <a 
+                href="https://2timeweb.com.br" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-foreground font-black text-xs md:text-sm tracking-normal ml-1 hover:text-[#C9A84C] transition-colors"
+              >
+                2TimeWeb
+              </a>
             </div>
 
             {/* Back to top */}

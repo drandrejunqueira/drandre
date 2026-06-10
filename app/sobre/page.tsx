@@ -252,7 +252,7 @@ export default function SobrePage() {
                   src="/image/dr andre/leticiaaguiar.jpeg" 
                   alt="Dr. André Elias Junqueira recebendo moção de Congratulação da Deputada Leticia Aguiar na ALESP"
                   fill
-                  className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                  className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent opacity-90" />
                 <div className="absolute bottom-6 left-6 right-6 text-white">

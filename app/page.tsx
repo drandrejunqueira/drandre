@@ -260,7 +260,7 @@ export default function HomePage() {
                     src="/image/dr andre/leticiaaguiar.jpeg" 
                     alt="Dr. André Elias Junqueira recebendo moção de congratulação na ALESP da Deputada Leticia Aguiar"
                     fill
-                    className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                    className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
                   />
                   <div className="absolute top-4 left-4 z-10">
                     <span className="text-[10px] font-bold uppercase tracking-wider bg-white/95 text-[#0E2A1A] px-3 py-1.5 rounded-full border border-[#E4E9E2]">
