@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { doctor } from '@/lib/data'
+import { getAttribution, pushEvent } from '@/lib/tracking'
 
 interface LeadFormProps {
   specialty?: string
@@ -49,9 +50,15 @@ export default function LeadForm({ specialty, variant = 'light', compact = false
       const res = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, attribution: getAttribution() }),
       })
       if (!res.ok) throw new Error('Falha ao enviar')
+
+      pushEvent('generate_lead', {
+        contact_method: 'formulario',
+        form_location: specialty ? 'pagina_especialidade' : 'formulario_site',
+        specialty: form.especialidade,
+      })
       setStatus('success')
     } catch {
       setStatus('error')

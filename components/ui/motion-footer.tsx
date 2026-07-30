@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
+import { doctor } from "@/lib/data";
 
 // Register ScrollTrigger safely for React
 if (typeof window !== "undefined") {
@@ -325,14 +326,14 @@ export function CinematicFooter() {
             <div ref={linksRef} className="flex flex-col items-center gap-6 w-full">
               {/* Primary Links */}
               <div className="flex flex-wrap justify-center gap-4 w-full">
-                <MagneticButton as="a" href="https://wa.me/5512999999999" className="footer-glass-pill px-10 py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group">
+                <MagneticButton as="a" href={`https://wa.me/${doctor.phones.whatsapp}`} className="footer-glass-pill px-10 py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group">
                   <svg className="w-6 h-6 text-muted-foreground group-hover:text-foreground transition-colors" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12.031 2c-5.514 0-10 4.486-10 10 0 1.763.461 3.473 1.332 4.978l-1.363 4.981 5.093-1.336c1.446.784 3.076 1.198 4.742 1.198 5.514 0 10-4.486 10-10s-4.486-10-10-10zm0 18.25c-1.604 0-3.174-.424-4.544-1.226l-.326-.192-3.37.883.899-3.284-.21-.334c-.878-1.393-1.341-3.007-1.341-4.665 0-4.549 3.701-8.25 8.25-8.25s8.25 3.701 8.25 8.25-3.701 8.25-8.25 8.25zm4.516-6.19c-.248-.124-1.465-.722-1.692-.805-.226-.083-.392-.124-.557.124-.166.248-.641.805-.784.97-.143.165-.286.186-.534.062-.248-.124-1.048-.387-1.996-1.233-.738-.658-1.235-1.471-1.38-1.719-.143-.248-.015-.382.11-.506.11-.112.248-.289.373-.434.124-.145.165-.248.248-.413.083-.165.042-.31-.021-.434-.062-.124-.557-1.343-.764-1.839-.201-.483-.404-.418-.557-.425-.145-.007-.31-.008-.475-.008-.165 0-.434.062-.661.31-.227.248-.867.847-.867 2.066 0 1.219.888 2.397 1.012 2.562.124.165 1.747 2.668 4.232 3.739.59.255 1.052.408 1.411.521.594.19 1.135.163 1.562.1.476-.07 1.465-.598 1.671-1.177.206-.58.206-1.076.144-1.177-.062-.103-.227-.165-.475-.29z" />
                   </svg>
                   Falar no WhatsApp
                 </MagneticButton>
                 
-                <MagneticButton as="a" href="#contact" className="footer-glass-pill px-10 py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group">
+                <MagneticButton as="a" href={`tel:${doctor.phones.consultorioHref}`} className="footer-glass-pill px-10 py-5 rounded-full text-foreground font-bold text-sm md:text-base flex items-center gap-3 group">
                   <svg className="w-6 h-6 text-muted-foreground group-hover:text-foreground transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                   </svg>

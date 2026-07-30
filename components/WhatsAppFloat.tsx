@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { doctor } from '@/lib/data'
+import { getAttribution, pushEvent } from '@/lib/tracking'
 import Image from 'next/image'
 
 export default function WhatsAppFloat() {
@@ -61,11 +62,20 @@ export default function WhatsAppFloat() {
           email: '',
           especialidade: 'WhatsApp Flutuante',
           mensagem: 'Contato direto iniciado via botão flutuante do WhatsApp do site.',
+          attribution: getAttribution(),
         }),
       })
 
       if (!res.ok) throw new Error('Erro ao salvar no CRM')
-      
+
+      // Um único evento: o botão flutuante captura o lead antes de redirecionar,
+      // então contabilizar também um whatsapp_click inflaria a conversão.
+      pushEvent('generate_lead', {
+        contact_method: 'whatsapp',
+        form_location: 'whatsapp_flutuante',
+        specialty: 'WhatsApp Flutuante',
+      })
+
       setStatus('success')
       
       // Criar mensagem personalizada

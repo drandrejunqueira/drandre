@@ -1,10 +1,41 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { neon } from '@neondatabase/serverless'
 
+/** Valores de utm_medium que caracterizam mídia paga. */
+const PAID_MEDIUMS = ['cpc', 'ppc', 'paid', 'paidsearch', 'paid_search', 'cpm', 'display']
+
+/**
+ * Traduz a atribuição capturada no navegador para o enum lead_source do CRM.
+ * Os IDs de clique são o sinal mais confiável — vêm direto da plataforma e não
+ * dependem de o anúncio estar com as UTMs corretas.
+ */
+function resolveLeadSource(attr: Record<string, string>): string {
+  if (attr.gclid || attr.gbraid || attr.wbraid || attr.gad_source) return 'google_ads'
+  if (attr.fbclid) return 'meta_ads'
+
+  const medium = (attr.utm_medium || '').toLowerCase()
+  const source = (attr.utm_source || '').toLowerCase()
+  const isPaid = PAID_MEDIUMS.includes(medium)
+  const isMeta =
+    source.includes('facebook') || source.includes('instagram') || source.includes('meta')
+
+  if (isPaid && source.includes('google')) return 'google_ads'
+  if (isPaid && isMeta) return 'meta_ads'
+  if (source.includes('instagram')) return 'instagram_organic'
+  if (source.includes('facebook')) return 'facebook_organic'
+  return 'google_organic'
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { nome, sobrenome, celular, email, especialidade, mensagem } = body
+    const { nome, sobrenome, celular, email, especialidade, mensagem, attribution } = body
+
+    const attr: Record<string, string> =
+      attribution && typeof attribution === 'object' ? attribution : {}
+    const leadSource = resolveLeadSource(attr)
+    const utmSource = attr.utm_source || 'site-dr-andre'
+    const utmCampaign = attr.utm_campaign || null
 
     // Validação básica
     if (!nome || !celular || !especialidade) {
@@ -25,14 +56,13 @@ export async function POST(req: NextRequest) {
     const sql = neon(dbUrl)
 
     // 1. Inserir Lead no banco
-    // source: 'google_organic' = visita orgânica ao site (enum válido)
-    // utm_source: identifica que veio especificamente do site dr-andre
+    // source / utm_*: derivados da atribuição real da sessão (ver resolveLeadSource).
     const rows = await sql`
       INSERT INTO leads (
         name, phone, email,
         status, source,
         specialty, complaint,
-        utm_source,
+        utm_source, utm_campaign,
         created_at, updated_at
       )
       VALUES (
@@ -40,10 +70,11 @@ export async function POST(req: NextRequest) {
         ${celular},
         ${email || null},
         'new',
-        'google_organic',
+        ${leadSource},
         ${especialidade},
         ${complaint},
-        'site-dr-andre',
+        ${utmSource},
+        ${utmCampaign},
         NOW(), NOW()
       )
       RETURNING id
@@ -76,11 +107,13 @@ export async function POST(req: NextRequest) {
       settings?.evolution_instance &&
       settings?.notify_new_lead_number
     ) {
+      const campanha = utmCampaign ? `\n🎯 Campanha: ${utmCampaign}` : ''
       const msg =
         `🔔 *Novo Lead no CRM*\n\n` +
         `👤 *${fullName}*\n` +
         `📱 ${celular}\n` +
-        `📌 Origem: Site Dr. André — ${especialidade}\n\n` +
+        `📌 Origem: Site Dr. André — ${especialidade}\n` +
+        `📊 Canal: ${leadSource}${campanha}\n\n` +
         `Acesse o sistema para acompanhar.`
 
       try {

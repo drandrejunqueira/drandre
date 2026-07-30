@@ -6,6 +6,8 @@ import { CinematicFooter } from '@/components/ui/motion-footer'
 import WhatsAppFloat from '@/components/WhatsAppFloat'
 import SmoothScroll from '@/components/SmoothScroll'
 import ScrollProgress from '@/components/ScrollProgress'
+import Analytics from '@/components/Analytics'
+import { GTM_ID } from '@/lib/tracking'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -75,6 +77,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR" className={`${inter.variable} ${playfair.variable}`}>
       <body>
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+        <Analytics />
         <SmoothScroll>
           <ScrollProgress />
           <Navbar />
