@@ -109,8 +109,9 @@ export async function GET(req: NextRequest) {
       ORDER BY id
     `) as LeadRow[]
 
+    // Sem a linha "Parameters:TimeZone=…" do modelo antigo: a Central de Dados a leria
+    // como cabeçalho. O fuso já vai embutido em cada Conversion Time (-03:00).
     const lines: string[] = [
-      `Parameters:TimeZone=${TIMEZONE_OFFSET.replace(':', '')};`,
       'Google Click ID,GBRAID,WBRAID,Phone Number,Conversion Name,Conversion Time,Conversion Value,Conversion Currency',
     ]
 
