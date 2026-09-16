@@ -15,7 +15,10 @@ import { neon } from '@neondatabase/serverless'
  *   (qualquer usuário, senha = chave); para testes manuais também vale ?key=…;
  * - a hora da conversão é congelada em tracking_data.ads_conversion_time na
  *   primeira exportação, para reuploads não contarem a mesma consulta duas vezes;
- * - só leads dos últimos 90 dias (janela de conversão do clique).
+ * - só leads dos últimos 90 dias (janela de conversão do clique);
+ * - leads sem ID de clique entram só com o telefone (E.164): o Google casa pelo hash
+ *   com os dados fornecidos pelo usuário no evento generate_lead (conversões
+ *   otimizadas para leads).
  */
 
 export const dynamic = 'force-dynamic'
@@ -102,9 +105,9 @@ export async function GET(req: NextRequest) {
       FROM leads
       WHERE status::text = ANY(${CONVERTED_STATUSES}::text[])
         AND created_at > NOW() - make_interval(days => ${LOOKBACK_DAYS})
-        AND tracking_data IS NOT NULL
         AND (
           tracking_data ? 'gclid' OR tracking_data ? 'gbraid' OR tracking_data ? 'wbraid'
+          OR phone IS NOT NULL
         )
       ORDER BY id
     `) as LeadRow[]
@@ -117,6 +120,8 @@ export async function GET(req: NextRequest) {
 
     for (const lead of rows) {
       const tracking = lead.tracking_data ?? {}
+      const phone = toE164(lead.phone)
+      if (!tracking.gclid && !tracking.gbraid && !tracking.wbraid && !phone) continue
       let conversionTime = tracking.ads_conversion_time
 
       // Congela a hora na primeira exportação: reuploads ficam idempotentes no Google Ads.
@@ -124,7 +129,8 @@ export async function GET(req: NextRequest) {
         conversionTime = formatConversionTime(lead.converted_at ?? lead.updated_at)
         await sql`
           UPDATE leads
-          SET tracking_data = tracking_data || jsonb_build_object('ads_conversion_time', ${conversionTime}::text)
+          SET tracking_data = COALESCE(tracking_data, '{}'::jsonb)
+            || jsonb_build_object('ads_conversion_time', ${conversionTime}::text)
           WHERE id = ${lead.id}
         `
       }
@@ -134,7 +140,7 @@ export async function GET(req: NextRequest) {
           tracking.gclid ?? '',
           tracking.gbraid ?? '',
           tracking.wbraid ?? '',
-          toE164(lead.phone),
+          phone,
           CONVERSION_NAME,
           conversionTime,
           '',
