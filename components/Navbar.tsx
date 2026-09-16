@@ -6,6 +6,7 @@ import { useLenis } from 'lenis/react'
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { navigation, doctor } from '@/lib/data'
+import WhatsAppButton from '@/components/whatsapp/WhatsAppButton'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -174,7 +175,7 @@ export default function Navbar() {
               <div className="flex gap-4 mt-4 justify-center text-sm text-[#4A6355]">
                 <a href={`tel:${doctor.phones.consultorioHref}`} className="hover:text-[#0E2A1A] transition-colors">{doctor.phones.consultorio}</a>
                 <span>·</span>
-                <a href={`https://wa.me/${doctor.phones.whatsapp}`} target="_blank" rel="noopener noreferrer" className="hover:text-[#0E2A1A] transition-colors">{doctor.phones.whatsappDisplay}</a>
+                <WhatsAppButton source="menu_mobile" className="hover:text-[#0E2A1A] transition-colors">{doctor.phones.whatsappDisplay}</WhatsAppButton>
               </div>
             </motion.div>
           </motion.div>

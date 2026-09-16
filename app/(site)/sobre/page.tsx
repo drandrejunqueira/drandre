@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { doctor } from '@/lib/data'
 import RevealOnScroll from '@/components/ui/RevealOnScroll'
 import SectionHeader from '@/components/ui/SectionHeader'
+import WhatsAppButton from '@/components/whatsapp/WhatsAppButton'
 
 export const metadata: Metadata = {
   title: 'Sobre o Dr. André Elias Junqueira',
@@ -102,10 +103,10 @@ export default function SobrePage() {
                   className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#C9A84C] text-[#0E2A1A] font-semibold text-sm shadow-[0_4px_16px_rgba(201,168,76,0.35)] hover:bg-[#DFC06A] hover:-translate-y-0.5 transition-all">
                   Agendar Consulta
                 </Link>
-                <a href={`https://wa.me/${doctor.phones.whatsapp}`} target="_blank" rel="noopener noreferrer"
+                <WhatsAppButton source="sobre_hero"
                   className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#25D366] text-white font-semibold text-sm hover:-translate-y-0.5 transition-all">
                   WhatsApp
-                </a>
+                </WhatsAppButton>
               </div>
             </RevealOnScroll>
           </div>

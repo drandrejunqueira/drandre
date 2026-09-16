@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { services, doctor } from '@/lib/data'
 import RevealOnScroll from '@/components/ui/RevealOnScroll'
 import SectionHeader from '@/components/ui/SectionHeader'
+import WhatsAppButton from '@/components/whatsapp/WhatsAppButton'
 
 export const metadata: Metadata = {
   title: 'Cirurgia Minimamente Invasiva',
@@ -95,10 +96,10 @@ export default function CirurgiaPage() {
                   Nem toda situação exige cirurgia. O Dr. André avalia cada caso individualmente e só indica o procedimento quando é realmente necessário — sempre buscando a opção menos invasiva possível.
                 </p>
                 <div className="space-y-3">
-                  <a href={`https://wa.me/${doctor.phones.whatsapp}`} target="_blank" rel="noopener noreferrer"
+                  <WhatsAppButton source="cirurgia_cta"
                     className="flex items-center gap-3 text-sm text-white/80 hover:text-white transition-colors">
                     <span>📱</span> WhatsApp: {doctor.phones.whatsappDisplay}
-                  </a>
+                  </WhatsAppButton>
                   <a href={`tel:${doctor.phones.consultorioHref}`}
                     className="flex items-center gap-3 text-sm text-white/80 hover:text-white transition-colors">
                     <span>📞</span> Consultório: {doctor.phones.consultorio}
@@ -113,10 +114,10 @@ export default function CirurgiaPage() {
                   className="block text-center px-8 py-4 rounded-full bg-[#C9A84C] text-[#0E2A1A] font-semibold shadow-[0_4px_20px_rgba(201,168,76,0.35)] hover:bg-[#DFC06A] hover:-translate-y-0.5 transition-all">
                   Agendar Avaliação
                 </Link>
-                <a href={`https://wa.me/${doctor.phones.whatsapp}`} target="_blank" rel="noopener noreferrer"
+                <WhatsAppButton source="cirurgia_cta"
                   className="block text-center px-8 py-4 rounded-full bg-[#25D366] text-white font-semibold hover:-translate-y-0.5 transition-all">
                   Falar pelo WhatsApp
-                </a>
+                </WhatsAppButton>
               </div>
             </div>
           </div>

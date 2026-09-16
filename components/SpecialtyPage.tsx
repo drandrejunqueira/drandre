@@ -7,6 +7,7 @@ import { doctor, specialties } from '@/lib/data'
 import RevealOnScroll from '@/components/ui/RevealOnScroll'
 import LeadForm from '@/components/ui/LeadForm'
 import FaqAccordion from '@/components/ui/FaqAccordion'
+import WhatsAppButton from '@/components/whatsapp/WhatsAppButton'
 
 interface Specialty {
   slug: string
@@ -96,10 +97,10 @@ export default function SpecialtyPage({ specialty }: { specialty: Specialty }) {
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#C9A84C] text-[#0E2A1A] font-bold shadow-[0_4px_24px_rgba(201,168,76,0.40)] hover:bg-[#DFC06A] hover:-translate-y-0.5 transition-all">
                   Agendar Consulta ↓
                 </a>
-                <a href={`https://wa.me/${doctor.phones.whatsapp}`} target="_blank" rel="noopener noreferrer"
+                <WhatsAppButton source="especialidade_hero"
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/20 bg-white/5 text-white font-semibold hover:bg-white/10 hover:-translate-y-0.5 transition-all">
                   💬 WhatsApp
-                </a>
+                </WhatsAppButton>
               </motion.div>
 
               {/* Trust badges */}

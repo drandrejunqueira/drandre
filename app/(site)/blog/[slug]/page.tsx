@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { blogPosts, doctor } from '@/lib/data'
 import RevealOnScroll from '@/components/ui/RevealOnScroll'
+import WhatsAppButton from '@/components/whatsapp/WhatsAppButton'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -159,11 +160,11 @@ export default async function BlogPostPage({ params }: Props) {
                 <div className="bg-[#F9FAF8] rounded-2xl border border-[#E4E9E2] p-6">
                   <h3 className="font-semibold text-[#0E2A1A] mb-4 text-sm">Fale conosco</h3>
                   <div className="space-y-3">
-                    <a href={`https://wa.me/${doctor.phones.whatsapp}`} target="_blank" rel="noopener noreferrer"
+                    <WhatsAppButton source="blog_sidebar"
                       className="flex items-center gap-3 text-sm text-[#4A6355] hover:text-[#0E2A1A] transition-colors">
                       <span className="w-8 h-8 rounded-lg bg-[#25D366]/10 flex items-center justify-center">📱</span>
                       {doctor.phones.whatsappDisplay}
-                    </a>
+                    </WhatsAppButton>
                     <a href={`tel:${doctor.phones.consultorioHref}`}
                       className="flex items-center gap-3 text-sm text-[#4A6355] hover:text-[#0E2A1A] transition-colors">
                       <span className="w-8 h-8 rounded-lg bg-[#F0F7F3] flex items-center justify-center">📞</span>

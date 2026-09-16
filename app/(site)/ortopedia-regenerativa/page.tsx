@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { services, doctor } from '@/lib/data'
 import RevealOnScroll from '@/components/ui/RevealOnScroll'
 import SectionHeader from '@/components/ui/SectionHeader'
+import WhatsAppButton from '@/components/whatsapp/WhatsAppButton'
 
 export const metadata: Metadata = {
   title: 'Ortopedia Regenerativa',
@@ -114,10 +115,10 @@ export default function OrtopediaRegenerativaPage() {
                     {doctor.address.full}
                   </p>
                   <div className="space-y-3">
-                    <a href={`https://wa.me/${doctor.phones.whatsapp}`} target="_blank" rel="noopener noreferrer"
+                    <WhatsAppButton source="regenerativa_contato"
                       className="flex items-center gap-3 text-sm text-white/80 hover:text-white transition-colors">
                       <span>📱</span> {doctor.phones.whatsappDisplay}
-                    </a>
+                    </WhatsAppButton>
                     <a href={`tel:${doctor.phones.consultorioHref}`}
                       className="flex items-center gap-3 text-sm text-white/80 hover:text-white transition-colors">
                       <span>📞</span> {doctor.phones.consultorio}

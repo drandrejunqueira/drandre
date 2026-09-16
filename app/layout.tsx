@@ -1,12 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
-import Navbar from '@/components/Navbar'
-import { CinematicFooter } from '@/components/ui/motion-footer'
-import WhatsAppFloat from '@/components/WhatsAppFloat'
-import SmoothScroll from '@/components/SmoothScroll'
-import ScrollProgress from '@/components/ScrollProgress'
 import Analytics from '@/components/Analytics'
+import { WhatsAppCaptureProvider } from '@/components/whatsapp/WhatsAppCaptureProvider'
 import { GTM_ID } from '@/lib/tracking'
 
 const inter = Inter({
@@ -73,6 +69,11 @@ export const metadata: Metadata = {
   },
 }
 
+/**
+ * Root layout: só o que é comum a TODO o site — fontes, GTM, tracking e o
+ * modal global de captura do WhatsApp. Menu, rodapé e smooth scroll vivem no
+ * layout do grupo (site); as landing pages de anúncio (/lp) não os carregam.
+ */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${inter.variable} ${playfair.variable}`}>
@@ -86,15 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         </noscript>
         <Analytics />
-        <SmoothScroll>
-          <ScrollProgress />
-          <Navbar />
-          <main className="relative z-10 bg-background min-h-screen">
-            {children}
-          </main>
-          <CinematicFooter />
-          <WhatsAppFloat />
-        </SmoothScroll>
+        <WhatsAppCaptureProvider>{children}</WhatsAppCaptureProvider>
       </body>
     </html>
   )

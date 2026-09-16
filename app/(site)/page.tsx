@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { doctor, specialties, blogPosts, preventionItems, stats } from '@/lib/data'
 import RevealOnScroll from '@/components/ui/RevealOnScroll'
 import JointSelector from '@/components/ui/JointSelector'
+import WhatsAppButton from '@/components/whatsapp/WhatsAppButton'
 
 export default function HomePage() {
   return (
@@ -96,24 +97,26 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Phones */}
+            {/* Contato direto — WhatsApp passa pelo modal de captura (lead no CRM) */}
             <div className="flex flex-wrap gap-6">
-              {[
-                { label: 'WhatsApp', value: doctor.phones.whatsappDisplay, href: `https://wa.me/${doctor.phones.whatsapp}`, external: true },
-                { label: 'Consultório', value: doctor.phones.consultorio, href: `tel:${doctor.phones.consultorioHref}`, external: false },
-              ].map(p => (
-                <a key={p.label} href={p.href} target={p.external ? '_blank' : undefined}
-                   rel="noopener noreferrer"
-                   className="flex items-center gap-3 group">
-                  <div className="w-10 h-10 rounded-xl border border-[#C9A84C]/30 bg-[#C9A84C]/8 flex items-center justify-center">
-                    <span className="text-[#C9A84C] text-sm">{p.external ? '📱' : '📞'}</span>
-                  </div>
-                  <div>
-                    <span className="block text-[10px] text-white/40 uppercase tracking-widest">{p.label}</span>
-                    <span className="block text-sm font-semibold text-white group-hover:text-[#DFC06A] transition-colors">{p.value}</span>
-                  </div>
-                </a>
-              ))}
+              <WhatsAppButton source="home_hero" className="flex items-center gap-3 group text-left">
+                <div className="w-10 h-10 rounded-xl border border-[#C9A84C]/30 bg-[#C9A84C]/8 flex items-center justify-center">
+                  <span className="text-[#C9A84C] text-sm">📱</span>
+                </div>
+                <div>
+                  <span className="block text-[10px] text-white/40 uppercase tracking-widest">WhatsApp</span>
+                  <span className="block text-sm font-semibold text-white group-hover:text-[#DFC06A] transition-colors">{doctor.phones.whatsappDisplay}</span>
+                </div>
+              </WhatsAppButton>
+              <a href={`tel:${doctor.phones.consultorioHref}`} className="flex items-center gap-3 group">
+                <div className="w-10 h-10 rounded-xl border border-[#C9A84C]/30 bg-[#C9A84C]/8 flex items-center justify-center">
+                  <span className="text-[#C9A84C] text-sm">📞</span>
+                </div>
+                <div>
+                  <span className="block text-[10px] text-white/40 uppercase tracking-widest">Consultório</span>
+                  <span className="block text-sm font-semibold text-white group-hover:text-[#DFC06A] transition-colors">{doctor.phones.consultorio}</span>
+                </div>
+              </a>
             </div>
           </div>
         </div>
@@ -726,12 +729,12 @@ export default function HomePage() {
                            font-bold shadow-[0_4px_24px_rgba(201,168,76,0.4)] hover:bg-[#DFC06A] hover:-translate-y-0.5 transition-all">
                 Agendar Consulta
               </Link>
-              <a href={`https://wa.me/${doctor.phones.whatsapp}`} target="_blank" rel="noopener noreferrer"
+              <WhatsAppButton source="home_cta_final"
                 className="inline-flex items-center gap-2 px-9 py-4 rounded-full
                            border border-white/20 bg-white/5 text-white font-semibold
                            hover:bg-white/10 hover:-translate-y-0.5 transition-all">
                 WhatsApp → {doctor.phones.whatsappDisplay}
-              </a>
+              </WhatsAppButton>
             </div>
           </RevealOnScroll>
         </div>
