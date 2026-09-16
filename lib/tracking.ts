@@ -59,9 +59,7 @@ function readCookie(name: string): string | null {
 function readUrlParams(): Attribution {
   if (typeof window === 'undefined') return {}
   try {
-    const hashQuery = window.location.hash.includes('?')
-      ? window.location.hash.split('?')[1]
-      : ''
+    const hashQuery = window.location.hash.includes('?') ? window.location.hash.split('?')[1] : ''
     const search = new URLSearchParams(window.location.search || hashQuery)
     const params: Attribution = {}
     search.forEach((value, key) => {
@@ -121,6 +119,26 @@ export function getAttribution(): Attribution {
     if (value && !ordered[key]) ordered[key] = value
   }
   return ordered
+}
+
+/**
+ * Dados do lead no formato que o Google Ads espera em `user_data`
+ * (conversões otimizadas para leads). O GTM lê esta chave no evento
+ * `generate_lead` e envia o hash SHA-256 — o valor em claro não sai do navegador.
+ */
+export function leadUserData(phone: string, email?: string): Record<string, string> {
+  const digits = phone.replace(/\D/g, '')
+  const e164 =
+    digits.length === 10 || digits.length === 11
+      ? `+55${digits}`
+      : digits.length === 12 || digits.length === 13
+        ? `+${digits}`
+        : ''
+  const data: Record<string, string> = {}
+  if (e164) data.phone_number = e164
+  const cleanEmail = (email || '').trim().toLowerCase()
+  if (cleanEmail) data.email = cleanEmail
+  return data
 }
 
 /** Push no dataLayer. Nunca lança, mesmo se o GTM ainda não carregou. */

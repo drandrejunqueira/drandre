@@ -4,7 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
 import { doctor } from '@/lib/data'
-import { getAttribution, pushEvent } from '@/lib/tracking'
+import { getAttribution, leadUserData, pushEvent } from '@/lib/tracking'
 import { WhatsAppIcon } from './WhatsAppIcon'
 
 /**
@@ -117,6 +117,7 @@ export function WhatsAppCaptureProvider({ children }: { children: React.ReactNod
         contact_method: 'whatsapp',
         form_location: source,
         specialty,
+        user_data: leadUserData(celular),
       })
       setStatus('success')
 

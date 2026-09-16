@@ -11,7 +11,8 @@ import { neon } from '@neondatabase/serverless'
  * clique original — fechando o ciclo que o site sozinho não consegue medir.
  *
  * Regras:
- * - protegido por ?key= comparado com OFFLINE_CONVERSIONS_KEY (503 se não definida);
+ * - protegido por OFFLINE_CONVERSIONS_KEY (503 se não definida): o Google usa HTTP Basic
+ *   (qualquer usuário, senha = chave); para testes manuais também vale ?key=…;
  * - a hora da conversão é congelada em tracking_data.ads_conversion_time na
  *   primeira exportação, para reuploads não contarem a mesma consulta duas vezes;
  * - só leads dos últimos 90 dias (janela de conversão do clique).
@@ -38,6 +39,17 @@ function keyMatches(provided: string | null, expected: string): boolean {
   const a = Buffer.from(provided)
   const b = Buffer.from(expected)
   return a.length === b.length && timingSafeEqual(a, b)
+}
+
+/** Chave vinda do Basic Auth (Central de Dados do Google Ads) ou de ?key= (teste manual). */
+function providedKey(req: NextRequest): string | null {
+  const auth = req.headers.get('authorization') ?? ''
+  if (auth.startsWith('Basic ')) {
+    const decoded = Buffer.from(auth.slice(6), 'base64').toString('utf8')
+    const separator = decoded.indexOf(':')
+    return separator >= 0 ? decoded.slice(separator + 1) : decoded
+  }
+  return req.nextUrl.searchParams.get('key')
 }
 
 /** "2026-09-16 14:05:00-03:00" — formato aceito pelo upload do Google Ads. */
@@ -70,8 +82,11 @@ export async function GET(req: NextRequest) {
     console.error('OFFLINE_CONVERSIONS_KEY não configurada')
     return NextResponse.json({ error: 'Feed não configurado' }, { status: 503 })
   }
-  if (!keyMatches(req.nextUrl.searchParams.get('key'), expectedKey)) {
-    return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+  if (!keyMatches(providedKey(req), expectedKey)) {
+    return NextResponse.json(
+      { error: 'Não autorizado' },
+      { status: 401, headers: { 'WWW-Authenticate': 'Basic realm="offline-conversions"' } }
+    )
   }
 
   const dbUrl = process.env.DATABASE_URL

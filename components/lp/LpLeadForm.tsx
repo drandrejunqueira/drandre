@@ -2,7 +2,7 @@
 
 import { useId, useState } from 'react'
 import { doctor } from '@/lib/data'
-import { getAttribution, pushEvent } from '@/lib/tracking'
+import { getAttribution, leadUserData, pushEvent } from '@/lib/tracking'
 import { WhatsAppIcon } from '@/components/whatsapp/WhatsAppIcon'
 
 interface Props {
@@ -73,6 +73,7 @@ export default function LpLeadForm({
         contact_method: 'formulario',
         form_location: `lp_${location}`,
         specialty: formSpecialty,
+        user_data: leadUserData(celular),
       })
       setStatus('success')
     } catch (error) {

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { doctor } from '@/lib/data'
-import { getAttribution, pushEvent } from '@/lib/tracking'
+import { getAttribution, leadUserData, pushEvent } from '@/lib/tracking'
 import WhatsAppButton from '@/components/whatsapp/WhatsAppButton'
 import { WhatsAppIcon } from '@/components/whatsapp/WhatsAppIcon'
 
@@ -39,7 +39,7 @@ export default function LeadForm({ specialty, variant = 'light', compact = false
   const [status, setStatus] = useState<Status>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
-  const set = (k: keyof typeof form, v: string) => setForm(f => ({ ...f, [k]: v }))
+  const set = (k: keyof typeof form, v: string) => setForm((f) => ({ ...f, [k]: v }))
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -60,6 +60,7 @@ export default function LeadForm({ specialty, variant = 'light', compact = false
         contact_method: 'formulario',
         form_location: specialty ? 'pagina_especialidade' : 'formulario_site',
         specialty: form.especialidade,
+        user_data: leadUserData(form.celular, form.email),
       })
       setStatus('success')
     } catch {
@@ -75,13 +76,14 @@ export default function LeadForm({ specialty, variant = 'light', compact = false
   const cardBg = isDark
     ? 'bg-white/5 border-white/10 backdrop-blur-sm'
     : isGold
-    ? 'bg-[#0E2A1A] border-[#C9A84C]/20'
-    : 'bg-white border-[#E4E9E2] shadow-[0_4px_40px_rgba(14,42,26,0.08)]'
+      ? 'bg-[#0E2A1A] border-[#C9A84C]/20'
+      : 'bg-white border-[#E4E9E2] shadow-[0_4px_40px_rgba(14,42,26,0.08)]'
 
   const labelColor = isDark || isGold ? 'text-white/70' : 'text-[#4A6355]'
-  const inputClass = isDark || isGold
-    ? 'bg-white/8 border-white/15 text-white placeholder-white/30 focus:border-[#C9A84C]/60 focus:bg-white/12'
-    : 'bg-[#F9FAF8] border-[#E4E9E2] text-[#0E2A1A] placeholder-[#8FA89A] focus:border-[#C9A84C] focus:bg-white'
+  const inputClass =
+    isDark || isGold
+      ? 'bg-white/8 border-white/15 text-white placeholder-white/30 focus:border-[#C9A84C]/60 focus:bg-white/12'
+      : 'bg-[#F9FAF8] border-[#E4E9E2] text-[#0E2A1A] placeholder-[#8FA89A] focus:border-[#C9A84C] focus:bg-white'
   const titleColor = isDark || isGold ? 'text-white' : 'text-[#0E2A1A]'
   const subColor = isDark || isGold ? 'text-white/55' : 'text-[#4A6355]'
 
@@ -116,11 +118,11 @@ export default function LeadForm({ specialty, variant = 'light', compact = false
         <div className="mb-6">
           <div className="flex items-center gap-2 mb-1">
             <div className="w-4 h-px bg-[#C9A84C]" />
-            <span className="text-xs font-semibold tracking-widest uppercase text-[#C9A84C]">Agendamento</span>
+            <span className="text-xs font-semibold tracking-widest uppercase text-[#C9A84C]">
+              Agendamento
+            </span>
           </div>
-          <h3 className={`font-head text-xl font-semibold ${titleColor}`}>
-            Agende sua consulta
-          </h3>
+          <h3 className={`font-head text-xl font-semibold ${titleColor}`}>Agende sua consulta</h3>
           <p className={`text-sm mt-1 ${subColor}`}>
             Preencha e entraremos em contato em até 1h útil.
           </p>
@@ -135,7 +137,7 @@ export default function LeadForm({ specialty, variant = 'light', compact = false
             <input
               type="text"
               value={form.nome}
-              onChange={e => set('nome', e.target.value)}
+              onChange={(e) => set('nome', e.target.value)}
               placeholder="João"
               required
               className={inputBase}
@@ -146,7 +148,7 @@ export default function LeadForm({ specialty, variant = 'light', compact = false
             <input
               type="text"
               value={form.sobrenome}
-              onChange={e => set('sobrenome', e.target.value)}
+              onChange={(e) => set('sobrenome', e.target.value)}
               placeholder="Silva"
               className={inputBase}
             />
@@ -155,11 +157,13 @@ export default function LeadForm({ specialty, variant = 'light', compact = false
 
         {/* Celular */}
         <div>
-          <label className={`block text-xs font-semibold mb-1.5 ${labelColor}`}>WhatsApp / Celular *</label>
+          <label className={`block text-xs font-semibold mb-1.5 ${labelColor}`}>
+            WhatsApp / Celular *
+          </label>
           <input
             type="tel"
             value={form.celular}
-            onChange={e => set('celular', e.target.value)}
+            onChange={(e) => set('celular', e.target.value)}
             placeholder="(12) 99999-9999"
             required
             className={inputBase}
@@ -172,7 +176,7 @@ export default function LeadForm({ specialty, variant = 'light', compact = false
           <input
             type="email"
             value={form.email}
-            onChange={e => set('email', e.target.value)}
+            onChange={(e) => set('email', e.target.value)}
             placeholder="joao@email.com"
             className={inputBase}
           />
@@ -180,16 +184,20 @@ export default function LeadForm({ specialty, variant = 'light', compact = false
 
         {/* Especialidade */}
         <div>
-          <label className={`block text-xs font-semibold mb-1.5 ${labelColor}`}>Especialidade / Motivo *</label>
+          <label className={`block text-xs font-semibold mb-1.5 ${labelColor}`}>
+            Especialidade / Motivo *
+          </label>
           <select
             value={form.especialidade}
-            onChange={e => set('especialidade', e.target.value)}
+            onChange={(e) => set('especialidade', e.target.value)}
             required
             className={`${inputBase} cursor-pointer`}
           >
             <option value="">Selecione uma opção...</option>
-            {specialtyOptions.map(opt => (
-              <option key={opt} value={opt}>{opt}</option>
+            {specialtyOptions.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
+              </option>
             ))}
           </select>
         </div>
@@ -197,10 +205,12 @@ export default function LeadForm({ specialty, variant = 'light', compact = false
         {/* Mensagem */}
         {!compact && (
           <div>
-            <label className={`block text-xs font-semibold mb-1.5 ${labelColor}`}>Descreva brevemente sua queixa</label>
+            <label className={`block text-xs font-semibold mb-1.5 ${labelColor}`}>
+              Descreva brevemente sua queixa
+            </label>
             <textarea
               value={form.mensagem}
-              onChange={e => set('mensagem', e.target.value)}
+              onChange={(e) => set('mensagem', e.target.value)}
               placeholder="Ex: Dor no joelho há 3 meses, piora ao subir escadas..."
               rows={3}
               className={`${inputBase} resize-none`}
@@ -209,9 +219,7 @@ export default function LeadForm({ specialty, variant = 'light', compact = false
         )}
 
         {/* Error */}
-        {status === 'error' && (
-          <p className="text-red-400 text-xs text-center">{errorMsg}</p>
-        )}
+        {status === 'error' && <p className="text-red-400 text-xs text-center">{errorMsg}</p>}
 
         {/* CTA */}
         <button
@@ -222,12 +230,25 @@ export default function LeadForm({ specialty, variant = 'light', compact = false
           {status === 'loading' ? (
             <span className="flex items-center justify-center gap-2">
               <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                />
               </svg>
               Enviando...
             </span>
-          ) : 'Solicitar Consulta →'}
+          ) : (
+            'Solicitar Consulta →'
+          )}
         </button>
 
         {/* Disclaimer */}
@@ -238,7 +259,9 @@ export default function LeadForm({ specialty, variant = 'light', compact = false
         {/* WhatsApp alt */}
         <div className="flex items-center gap-3">
           <div className={`flex-1 h-px ${isDark || isGold ? 'bg-white/10' : 'bg-[#E4E9E2]'}`} />
-          <span className={`text-[10px] font-semibold uppercase tracking-widest ${subColor}`}>ou</span>
+          <span className={`text-[10px] font-semibold uppercase tracking-widest ${subColor}`}>
+            ou
+          </span>
           <div className={`flex-1 h-px ${isDark || isGold ? 'bg-white/10' : 'bg-[#E4E9E2]'}`} />
         </div>
         <WhatsAppButton
