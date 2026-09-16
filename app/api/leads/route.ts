@@ -57,12 +57,16 @@ export async function POST(req: NextRequest) {
 
     // 1. Inserir Lead no banco
     // source / utm_*: derivados da atribuição real da sessão (ver resolveLeadSource).
+    // tracking_data: atribuição completa (gclid/gbraid/wbraid, utm_*, cookies) —
+    // é o que permite importar "consulta agendada" como conversão offline no Google Ads.
+    const trackingData = Object.keys(attr).length > 0 ? JSON.stringify(attr) : null
     const rows = await sql`
       INSERT INTO leads (
         name, phone, email,
         status, source,
         specialty, complaint,
         utm_source, utm_campaign,
+        tracking_data,
         created_at, updated_at
       )
       VALUES (
@@ -75,6 +79,7 @@ export async function POST(req: NextRequest) {
         ${complaint},
         ${utmSource},
         ${utmCampaign},
+        ${trackingData}::jsonb,
         NOW(), NOW()
       )
       RETURNING id
