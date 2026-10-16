@@ -32,6 +32,9 @@ export interface LpConfig {
   pains: string[]
   conditionsTitle: string
   conditions: string[]
+  /** Opções do menu "principal queixa" do formulário. Sem isso, usa as 8 primeiras
+   *  condições — o que serve quando a ordem de `conditions` já segue a busca. */
+  complaints?: string[]
   treatments: string[]
   faqs: LpFaq[]
 }
@@ -61,6 +64,8 @@ const joelho = specialty('joelho')
 const coluna = specialty('coluna')
 const quadril = specialty('quadril')
 const ombro = specialty('ombro-cotovelo')
+const pe = specialty('pe-tornozelo')
+const mao = specialty('maos-punhos')
 
 export const landingPages: LpConfig[] = [
   {
@@ -110,6 +115,18 @@ export const landingPages: LpConfig[] = [
     ],
     conditionsTitle: 'O que tratamos na coluna',
     conditions: bulletLines(coluna.description),
+    // A maior parte das buscas é lombar/ciático; a ordem de `conditions` começa
+    // pela cervical e deixava essas opções de fora do menu.
+    complaints: [
+      'Lombalgia crônica',
+      'Lombociatalgia',
+      'Hérnia de disco lombar',
+      'Estenose do canal lombar',
+      'Hérnia de disco cervical',
+      'Cervicalgia crônica',
+      'Escoliose',
+      'Espondilolistese',
+    ],
     treatments: coluna.treatments,
     faqs: coluna.faqs,
   },
@@ -162,6 +179,56 @@ export const landingPages: LpConfig[] = [
     conditions: bulletLines(ombro.description),
     treatments: ombro.treatments,
     faqs: ombro.faqs,
+  },
+  {
+    slug: 'pe-tornozelo',
+    specialtySlug: 'pe-tornozelo',
+    formSpecialty: 'Pé e Tornozelo',
+    title: 'Ortopedista especialista em pé e tornozelo em São José dos Campos',
+    description:
+      'Dor no pé, no calcanhar ou no tornozelo? Fascite plantar, esporão, entorse e tendão de Aquiles. Avaliação com ortopedista em SJC. Agende sua consulta.',
+    eyebrow: 'Ortopedista de pé e tornozelo · São José dos Campos',
+    headline: ['Dor no pé', 'ou no calcanhar?', 'Volte a pisar sem dor.'],
+    sub: 'Fascite plantar, esporão, entorse ou tendão de Aquiles: o Dr. André Elias Junqueira avalia a causa da dor e monta um plano de tratamento individualizado — em São José dos Campos.',
+    bullets: COMMON_BULLETS,
+    painsTitle: 'Você se identifica com algum destes sinais?',
+    pains: [
+      'Dor no calcanhar nos primeiros passos da manhã',
+      'Dor na sola do pé que piora depois de muito tempo em pé',
+      'Tornozelo que torce com facilidade ou ficou instável após entorse',
+      'Dor ou inchaço no tendão de Aquiles ao caminhar ou correr',
+      'Joanete ou dedos tortos que doem no sapato',
+      'Já usou palmilha ou remédio e a dor voltou',
+    ],
+    conditionsTitle: 'O que tratamos no pé e tornozelo',
+    conditions: bulletLines(pe.description),
+    treatments: pe.treatments,
+    faqs: pe.faqs,
+  },
+  {
+    slug: 'mao-punho',
+    specialtySlug: 'maos-punhos',
+    formSpecialty: 'Mãos e Punhos',
+    title: 'Ortopedista especialista em mão e punho em São José dos Campos',
+    description:
+      'Dor no punho, formigamento na mão ou dedo travando? Túnel do carpo, tendinite e dedo em gatilho. Avaliação com ortopedista em SJC. Agende sua consulta.',
+    eyebrow: 'Ortopedista de mão e punho · São José dos Campos',
+    headline: ['Dor ou formigamento', 'na mão e no punho?', 'Recupere força e firmeza.'],
+    sub: 'Túnel do carpo, tendinite, dedo em gatilho ou artrose do polegar: o Dr. André Elias Junqueira identifica a causa e trata com o mínimo de intervenção — em São José dos Campos.',
+    bullets: COMMON_BULLETS,
+    painsTitle: 'Você se identifica com algum destes sinais?',
+    pains: [
+      'Formigamento ou dormência nos dedos, principalmente à noite',
+      'Dor no punho ao digitar, usar o celular ou carregar peso',
+      'Dedo que trava dobrado e estala ao esticar',
+      'Dor na base do polegar ao abrir potes ou girar chaves',
+      'Perda de força para segurar objetos',
+      'Já usou órtese ou fez fisioterapia e a dor voltou',
+    ],
+    conditionsTitle: 'O que tratamos na mão e no punho',
+    conditions: bulletLines(mao.description),
+    treatments: mao.treatments,
+    faqs: mao.faqs,
   },
   {
     slug: 'ortopedista',

@@ -69,7 +69,7 @@ export default async function LandingPage({ params }: { params: Promise<{ slug: 
   const lp = getLandingPage(slug)
   if (!lp) notFound()
 
-  const complaints = lp.conditions.slice(0, 8)
+  const complaints = lp.complaints ?? lp.conditions.slice(0, 8)
   const [headBefore, headHighlight, headAfter] = lp.headline
 
   return (
