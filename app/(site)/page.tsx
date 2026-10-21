@@ -64,18 +64,18 @@ export default function HomePage() {
               Ortopedia Regenerativa · São José dos Campos
             </div>
 
-            {/* Nome */}
-            <p className="text-[#C9A84C] font-body text-base mb-3 tracking-wide">
-              {doctor.name}
-            </p>
+            {/* H1 = nome + busca principal ("ortopedista em São José dos Campos"); o slogan é só visual */}
+            <h1 className="text-[#C9A84C] font-body text-base mb-3 tracking-wide">
+              {`${doctor.name} · Ortopedista em São José dos Campos`}
+            </h1>
 
             {/* Headline */}
-            <h1 className="font-head text-5xl sm:text-6xl lg:text-7xl font-semibold text-white leading-[1.0] mb-6">
+            <p className="font-head text-5xl sm:text-6xl lg:text-7xl font-semibold text-white leading-[1.0] mb-6">
               Ortopedia<br/>
               <span className="italic font-normal text-[#DFC06A]">regenerativa:</span><br/>
               mais inovação<br/>
               e menos dor.
-            </h1>
+            </p>
 
             <p className="text-white/60 text-base leading-relaxed max-w-md mb-10">
               Tratamento individualizado com base em ciência, tecnologia médica de ponta e foco total em qualidade de vida.
@@ -172,8 +172,8 @@ export default function HomePage() {
               {/* Badge flutuante */}
               <div className="absolute -bottom-8 -right-6 bg-white rounded-2xl p-5 shadow-[0_8px_40px_rgba(14,42,26,0.12)] border border-[#E4E9E2]">
                 <div className="w-11 h-11 rounded-xl bg-[#0E2A1A] flex items-center justify-center text-[#C9A84C] text-xl mb-3">🏥</div>
-                <div className="font-bold text-sm text-[#0E2A1A]">CRM Registrado</div>
-                <div className="text-xs text-[#4A6355] mt-0.5">Cirurgião Ortopédico</div>
+                <div className="font-bold text-sm text-[#0E2A1A]">{doctor.crm}</div>
+                <div className="text-xs text-[#4A6355] mt-0.5">{doctor.rqe} · {doctor.title}</div>
               </div>
               {/* Gold accent line */}
               <div className="absolute top-8 -left-3 w-1 h-20 bg-gradient-to-b from-[#C9A84C] to-transparent rounded-full" />

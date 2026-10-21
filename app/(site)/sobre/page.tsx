@@ -52,8 +52,8 @@ export default function SobrePage() {
                 {/* Badges flutuantes */}
                 <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl p-5 shadow-[0_8px_32px_rgba(14,42,26,0.10)] border border-[#E4E9E2]">
                   <div className="w-11 h-11 rounded-xl bg-[#0E2A1A] flex items-center justify-center text-xl mb-3">🏥</div>
-                  <div className="font-bold text-sm text-[#0E2A1A]">CRM Registrado</div>
-                  <div className="text-xs text-[#4A6355] mt-0.5">Cirurgião Ortopédico</div>
+                  <div className="font-bold text-sm text-[#0E2A1A]">{doctor.crm}</div>
+                  <div className="text-xs text-[#4A6355] mt-0.5">{doctor.rqe} · {doctor.title}</div>
                 </div>
                 <div className="absolute -top-6 -right-6 bg-white rounded-2xl p-4 shadow-[0_8px_32px_rgba(14,42,26,0.10)] border border-[#E4E9E2]">
                   <div className="font-head text-2xl font-bold text-[#0E2A1A]">10<span className="text-[#C9A84C] text-lg">+</span></div>

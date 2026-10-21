@@ -21,7 +21,7 @@ import { WhatsAppIcon } from '@/components/whatsapp/WhatsAppIcon'
  * - noindex: é destino de anúncio, não concorre com as páginas orgânicas.
  */
 
-const CRM = 'CRM-SP 150430'
+const CRM = doctor.crm
 const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(doctor.address.full)}`
 
 const STEPS = [

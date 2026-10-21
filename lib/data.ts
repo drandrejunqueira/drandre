@@ -30,12 +30,24 @@ Com as técnicas mais modernas da medicina ortopédica, trabalhamos para que voc
     neighborhood: 'Jardim Aquarius',
     city: 'São José dos Campos – SP',
     full: 'Rua Armando de Oliveira Cobra, 50 | Sala 712, Jardim Aquarius, São José dos Campos – SP',
+    // Mesmo endereço do Perfil da Empresa no Google: NAP idêntico reforça o ranqueamento local
+    schema: {
+      streetAddress: 'Rua Armando de Oliveira Cobra, 50 - Sala 712',
+      addressLocality: 'São José dos Campos',
+      addressRegion: 'SP',
+      postalCode: '12246-002',
+      addressCountry: 'BR',
+    },
   },
+  // Publicidade médica (CFM 2.336/2023) exige CRM e RQE visíveis
+  crm: 'CRM-SP 150430',
+  rqe: 'RQE 62485',
   email: 'contato@drandreortopedia.com.br',
   hours: 'Seg – Sex: 8h às 18h',
   social: {
-    instagram: '#',
+    instagram: 'https://www.instagram.com/drandreortopedista/',
     facebook: '#',
+    doctoralia: 'https://www.doctoralia.com.br/andre-elias-junqueira/ortopedista-traumatologista/sao-jose-dos-campos',
   },
 }
 
